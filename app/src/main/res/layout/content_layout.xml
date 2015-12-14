@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:id="@+id/varilaatikko"
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+        </LinearLayout>
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bSeekBar"
+        android:max="255"
+        android:maxWidth="250dp"
+        android:minWidth="250dp"
+        android:layout_gravity="left|top"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/gSeekBar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rSeekBar"
+        android:max="255"
+        android:minWidth="250dp"
+        android:maxWidth="250dp"
+        android:layout_below="@+id/varilaatikko"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_alignParentStart="true"
+         />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gSeekBar"
+        android:max="255"
+        android:maxWidth="250dp"
+        android:minWidth="250dp"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/rText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rText"
+        android:layout_alignBottom="@+id/rSeekBar"
+        android:layout_toRightOf="@+id/rSeekBar"
+        android:layout_toEndOf="@+id/rSeekBar"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gText"
+        android:layout_alignTop="@+id/bSeekBar"
+        android:layout_alignLeft="@+id/bText"
+        android:layout_alignStart="@+id/bText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bText"
+        android:layout_above="@+id/bSeekBar"
+        android:layout_alignLeft="@+id/rText"
+        android:layout_alignStart="@+id/rText" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/emailButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp" />
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
