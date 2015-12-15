@@ -2,21 +2,20 @@ package com.example.johannes.colorpicker;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     int bValue;
     LinearLayout varilaatikko;
     FloatingActionButton emailButton;
+    ArrayList<Colour> colors;
+    String hex;
+    TextView hexView;
 
 
     @Override
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 rValue = progress;
-                rText.setText("" + rValue);
+                rText.setText("R: " + rValue);
                 Log.i("JOHANNES", "R: " + gValue);
                 setColor();
             }
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 gValue = progress;
-                gText.setText("" + gValue);
+                gText.setText("G: " + gValue);
                 Log.i("JOHANNES", "G: " + gValue);
                 setColor();
             }
@@ -85,10 +87,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 bValue = progress;
-                bText.setText("" + bValue);
+                bText.setText("B: " + bValue);
                 Log.i("JOHANNES", "B: " + gValue);
                 setColor();
-
             }
 
             @Override
@@ -105,16 +106,54 @@ public class MainActivity extends AppCompatActivity {
         emailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int[] rgb = new int[3];
+                rgb[0] = rValue;
+                rgb[1] = gValue;
+                rgb[2] = bValue;
+                Colour colour = new Colour(hex, rgb);
+                boolean sameHex = checkHexes();
 
+                if (sameHex == false && colors.size() < 15) {
+                    colors.add(colour);
+                    Toast.makeText(MainActivity.this, "New color added to list !", Toast.LENGTH_SHORT).show();
+                }else if(sameHex == false && colors.size() == 15){
+                    Toast.makeText(MainActivity.this, "Colorlist is full !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
+    private void getColors(){
+        Intent intent = getIntent();
+        if(intent.getParcelableArrayListExtra("colorslist") != null){
+            colors = intent.getParcelableArrayListExtra("colorslist");
+        }else{
+            colors = new ArrayList<>();
+        }
+    }
+
+    private void moveToColorlist(){
+        Intent intent = new Intent(this, colorListActivity.class);
+        intent.putParcelableArrayListExtra("colorlist", colors);
+        startActivity(intent);
+    }
+
+    private boolean checkHexes() {
+       boolean sameHex = false;
+        for(int i=0; i < colors.size(); i++){
+            if(hex.equals(colors.get(i).getHex())){
+                sameHex = true;
+            }
+        }
+        return sameHex;
+    }
+
     private void setColor() {
 
-        String hex = String.format("#%02x%02x%02x", rValue, gValue, bValue);
+        hex = String.format("#%02X%02X%02X", rValue, gValue, bValue);
         Log.i("JOHANNES", hex);
         varilaatikko.setBackgroundColor(Color.parseColor(hex));
+        hexView.setText("HEX: "+hex);
     }
 
     private void initializeVariables() {
@@ -129,10 +168,14 @@ public class MainActivity extends AppCompatActivity {
         rText = (TextView)findViewById(R.id.rText);
         gText = (TextView)findViewById(R.id.gText);
         bText = (TextView)findViewById(R.id.bText);
-        rText.setText(""+rValue);
-        gText.setText(""+gValue);
-        bText.setText(""+bValue);
+        rText.setText("R: "+rValue);
+        gText.setText("G: "+gValue);
+        bText.setText("B: "+bValue);
         emailButton = (FloatingActionButton)findViewById(R.id.emailButton);
+        getColors();
+        hexView = (TextView)findViewById(R.id.hexValue);
+        setColor();
+        hexView.setText("HEX: "+hex);
     }
 
 
@@ -153,6 +196,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }else if(id == R.id.action_email){
+            moveToColorlist();
             return true;
         }
 

@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">colorPicker</string>
+    <string name="app_name">ColorPicker</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_color_list">colorListActivity</string>
+    <string name="title_activity_color_list">Colorlist</string>
+    <string name="action_email">send email</string>
 </resources>

@@ -62,23 +62,26 @@
         android:layout_toRightOf="@+id/rSeekBar"
         android:layout_toEndOf="@+id/rSeekBar"
         android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginStart="25dp"
+        android:text="R: " />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gText"
-        android:layout_alignTop="@+id/bSeekBar"
-        android:layout_alignLeft="@+id/bText"
-        android:layout_alignStart="@+id/bText" />
+        android:text="G: "
+        android:layout_alignTop="@+id/gSeekBar"
+        android:layout_alignLeft="@+id/rText"
+        android:layout_alignStart="@+id/rText" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bText"
-        android:layout_above="@+id/bSeekBar"
-        android:layout_alignLeft="@+id/rText"
-        android:layout_alignStart="@+id/rText" />
+        android:text="B: "
+        android:layout_alignTop="@+id/bSeekBar"
+        android:layout_alignLeft="@+id/gText"
+        android:layout_alignStart="@+id/gText" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/emailButton"
@@ -87,7 +90,20 @@
             android:layout_gravity="bottom|center"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="20dp"
+            android:src="@android:drawable/ic_input_add" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/hexValue"
+            android:layout_above="@+id/emailButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="35dp"
+            android:text="HEX: "
+            android:layout_marginLeft="10dp" />
 
     </RelativeLayout>
 
