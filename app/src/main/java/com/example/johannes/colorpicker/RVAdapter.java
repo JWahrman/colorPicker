@@ -29,7 +29,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.TaskViewHolder> {
 
     @Override
     public void onBindViewHolder(TaskViewHolder taskViewHolder, int position) {
-        taskViewHolder.headline.setText(tasks.get(position).getOtsikko());
+        //taskViewHolder.headline.setText(tasks.get(position).getOtsikko());
         taskViewHolder.cv.setCardBackgroundColor(Color.parseColor(tasks.get(position).getOtsikko()));
     }
 

@@ -28,8 +28,6 @@ import java.util.List;
 public class colorListActivity extends AppCompatActivity {
 
     ArrayList<Colour> colors;
-    int row;
-    int column;
     String message;
     int r;
     int g;
@@ -43,7 +41,7 @@ public class colorListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_color_list);
 
         getColors();
-        Button send = (Button)findViewById(R.id.button);
+        Button send = (Button) findViewById(R.id.button);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,17 +50,17 @@ public class colorListActivity extends AppCompatActivity {
         });
 
         List<Task> tasks = addTaskToList();
-
         RecyclerView tasklist = (RecyclerView) findViewById(R.id.tasklist);
         tasklist.setHasFixedSize(true);
-
         LinearLayoutManager llm = new LinearLayoutManager(this);
         tasklist.setLayoutManager(llm);
-
         RVAdapter adapter = new RVAdapter(tasks);
         tasklist.setAdapter(adapter);
 
-        FloatingActionButton backButton = (FloatingActionButton)findViewById(R.id.backButton);
+
+        //showColors();
+
+        FloatingActionButton backButton = (FloatingActionButton) findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,10 +72,10 @@ public class colorListActivity extends AppCompatActivity {
     }
 
     private List<Task> addTaskToList() {
-        Task task = new Task();
         List<Task> tasks = new ArrayList<>();
 
-        for(int i=0; i < colors.size(); i++){
+        for (int i = 0; i < colors.size(); i++) {
+            Task task = new Task();
             task.setOtsikko(colors.get(i).getHex());
             tasks.add(task);
         }
@@ -91,17 +89,17 @@ public class colorListActivity extends AppCompatActivity {
         String[] TO = {""};
         String[] CC = {""};
 
-        EditText editText = (EditText)findViewById(R.id.editText);
+        EditText editText = (EditText) findViewById(R.id.editText);
         String emailAddress = editText.getText().toString();
         TO[0] = emailAddress;
         message = "Colors: ";
-        for(int i = 0; i < colors.size(); i++){
+        for (int i = 0; i < colors.size(); i++) {
             colour = colors.get(i);
             rgb = colour.getRgb();
             r = rgb[0];
             g = rgb[1];
             b = rgb[2];
-            message = message+System.lineSeparator()+(i+1)+". "+colour.getHex()+", RGB("+r+", "+g+", "+b+")";
+            message = message + System.lineSeparator() + (i + 1) + ". " + colour.getHex() + ", RGB(" + r + ", " + g + ", " + b + ")";
         }
 
         emailIntent.setData(Uri.parse("mailto:"));
@@ -114,8 +112,7 @@ public class colorListActivity extends AppCompatActivity {
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             finish();
-        }
-        catch (android.content.ActivityNotFoundException ex) {
+        } catch (android.content.ActivityNotFoundException ex) {
             ex.printStackTrace();
         }
     }
@@ -143,9 +140,9 @@ public class colorListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getColors(){
+    private void getColors() {
         Intent intent = getIntent();
-        if(intent.getParcelableArrayListExtra("colorlist") != null){
+        if (intent.getParcelableArrayListExtra("colorlist") != null) {
             colors = intent.getParcelableArrayListExtra("colorlist");
         }
     }
